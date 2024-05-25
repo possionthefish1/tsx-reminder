@@ -9,9 +9,20 @@ interface ReminderListProps {
 
 function ReminderList({ items }: ReminderListProps) {
 	return (
-		<ul>
+		<ul className="rounded-md">
 			{items.map((item) => (
-				<li key={item.id}>{item.title}</li>
+				<li
+					className="p-2 ring-2 rounded-md flex justify-between"
+					key={item.id}
+				>
+					{item.title}
+					<button
+						type="button"
+						className="px-2 py-1 rounded bg-red-500 text-white"
+					>
+						Delete
+					</button>
+				</li>
 			))}
 		</ul>
 	);
