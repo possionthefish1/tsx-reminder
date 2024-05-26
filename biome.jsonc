@@ -36,7 +36,7 @@
 				"recommended": true
 			},
 			"a11y": {
-				"all": true
+				"recommended": true
 			},
 			"security": {
 				"recommended": true
@@ -78,7 +78,10 @@
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "space", //default "tab"
-		"indentWidth": 2 // default 2
+		"indentWidth": 2, // default 2
+		"lineWidth": 80, // default 80
+		"formatWithErrors": true, // default false
+		"attributePosition": "multiline" // default auto
 	},
 	"javascript": {
 		// also apply to TS files
@@ -86,8 +89,6 @@
 			"quoteStyle": "single", // default "double"
 			"jsxQuoteStyle": "single", // default "double"
 			"trailingComma": "all", //default "all", choose "es5" to add comma only where older browser support.
-			"indentStyle": "space", // default "tab"
-			"indentWidth": 2, // default 2
 			"bracketSameLine": false // default false
 		}
 	}

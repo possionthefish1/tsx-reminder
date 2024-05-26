@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // import styles from './NewReminder.module.css';
 
 interface NewReminderProps {
@@ -9,11 +9,20 @@ interface NewReminderProps {
 
 function NewReminder({ onAddReminder }: NewReminderProps): React.JSX.Element {
   const [label, setLabel] = useState('');
+  const inputRef = useRef();
+
+  // useEffect(() => {
+  //   (inputRef.current as HTMLInputElement).focus();
+  // });
 
   return (
     <form
-      className='container mx-auto mb-6 grid w-full grid-cols-2 items-center'
-      onSubmit={() => onAddReminder}
+      className='container mx-auto mb-6 grid w-full grid-cols-[2fr_1fr] items-center'
+      onSubmit={(event: React.FormEvent) => {
+        event.preventDefault();
+        onAddReminder(label);
+        setLabel('');
+      }}
     >
       <div className='flex items-center justify-around gap-4'>
         <label
@@ -23,8 +32,12 @@ function NewReminder({ onAddReminder }: NewReminderProps): React.JSX.Element {
           New to do
         </label>
         <input
+          ref={(input) => input?.focus()}
+          // ref={inputRef}
           id='new-reminder'
-          className='grow border-2 border-slate-800 border-solid p-2'
+          placeholder='Please enter new reminder here'
+          required={true}
+          className='grow rounded-lg border-2 border-slate-800 border-solid p-2 valid:border-slate-800 focus:ring-8 invalid:ring-red-300'
           type='text'
           value={label}
           onChange={(e) => setLabel(e.target.value)}
@@ -32,9 +45,9 @@ function NewReminder({ onAddReminder }: NewReminderProps): React.JSX.Element {
       </div>
       <button
         type={'submit'}
-        className='mx-4 px-3 py-2 rounded-full text-white hover:bg-blue-700 bg-blue-500 hover:text-white border-solid border-2 border-blue-500 active:ring-8 active: ring-red-300'
+        className='mx-4 rounded-full border-2 border-blue-500 border-solid bg-blue-500 px-3 py-2 text-white ring-blue-300 hover:bg-blue-700 hover:text-white focus:outline-none active:ring-8 focus:ring-8 focus:ring-blue-300'
       >
-        Add
+        Add Reminder
       </button>
     </form>
   );
